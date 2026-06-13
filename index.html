@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="ASSETS/CSS/estilos.css">
+    <title>Memoria Técnica - Createx & Colombia 5.0</title>
+
+</head>
+<style>
+     * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f4f7f6;
+            padding: 20px;
+        }
+
+        header {
+            background: linear-gradient(135deg, #0f2027 0%, #203a43 50%, #2c5364 100%);
+            color: #fff;
+            padding: 45px 20px;
+            text-align: center;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+        }
+
+        header h1 {
+            font-size: 2.6rem;
+            margin-bottom: 10px;
+            letter-spacing: 1px;
+        }
+
+        header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* Sistema de Pestañas con CSS Puro */
+        .tabs {
+            display: flex;
+            flex-wrap: wrap;
+            margin-bottom: 30px;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+        }
+
+        .tab-label {
+            padding: 15px 25px;
+            cursor: pointer;
+            background: #e2e8f0;
+            color: #4a5568;
+            font-weight: 600;
+            transition: background 0.3s, color 0.3s;
+            flex: 1;
+            text-align: center;
+            border-bottom: 3px solid transparent;
+        }
+
+        .tab-radio {
+            display: none;
+        }
+
+        .tab-content {
+            width: 100%;
+            display: none;
+            background: transparent;
+            animation: fadeIn 0.5s ease;
+        }
+
+        /* Lógica de activación de pestañas */
+        #tab1:checked ~ .tabs .label1,
+        #tab2:checked ~ .tabs .label2 {
+            background: #fff;
+            color: #1e3c72;
+            border-bottom: 3px solid #364fc7;
+        }
+
+        #tab1:checked ~ #content1,
+        #tab2:checked ~ #content2 {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .intro-section {
+            background: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+
+        .intro-createx { border-left: 5px solid #364fc7; }
+        .intro-colombia { border-left: 5px solid #0ca678; }
+
+        .intro-section h2 {
+            color: #1e3c72;
+            margin-bottom: 15px;
+            font-size: 1.6rem;
+        }
+
+        /* Títulos de subsección dentro del contenido */
+        .section-title {
+            color: #2c3e50;
+            margin: 30px 0 15px 0;
+            font-size: 1.4rem;
+            border-bottom: 2px solid #e2e8f0;
+            padding-bottom: 5px;
+        }
+
+        .grid-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+
+        .card {
+            background: #fff;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+        }
+
+        .media-container {
+            width: 100%;
+            height: 240px;
+            background-color: #e2e8f0;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .media-container img, 
+        .media-container video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .card-content {
+            padding: 20px;
+        }
+
+        .card-content h3 {
+            font-size: 1.2rem;
+            color: #2d3748;
+            margin-bottom: 10px;
+        }
+
+        .card-content p {
+            font-size: 0.95rem;
+            color: #4a5568;
+            margin-bottom: 15px;
+            text-align: justify;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .bg-tech { background-color: #edf2ff; color: #364fc7; }
+        .bg-ux { background-color: #fff0f6; color: #d6336c; }
+        .bg-industry { background-color: #e3faf2; color: #0ca678; }
+        .bg-event { background-color: #fff9db; color: #f59f00; }
+        .bg-design { background-color: #fff0f6; color: #cc5de8; }
+        .bg-team { background-color: #e3f2fd; color: #1565c0; }
+        .bg-video { background-color: #fce4ec; color: #c2185b; }
+
+        footer {
+            text-align: center;
+            padding: 30px;
+            margin-top: 40px;
+            color: #718096;
+            border-top: 1px solid #e2e2e2;
+            font-size: 0.9rem;
+        }
+</style>
+<body>
+
+    <div class="container">
+        <header>
+            <h1>Memorias de Inmersión Tecnológica 2026</h1>
+            <p>Registro académico de experiencias: Automatización Industrial en Createx y Soberanía Digital en Colombia 5.0</p>
+        </header>
+
+    
+        <input type="radio" name="nav-tabs" id="tab1" class="tab-radio" checked>
+        <input type="radio" name="nav-tabs" id="tab2" class="tab-radio">
+
+        <div class="tabs">
+            <label for="tab1" class="tab-label label1">1. Feria Createx 2026</label>
+            <label for="tab2" class="tab-label label2">2. Encuentro Colombia 5.0</label>
+        </div>
+
+   
+        <div id="content1" class="tab-content">
+            <section class="intro-section intro-createx">
+                <h2>Innovación y Automatización Textil</h2>
+                <p>La visita a Createx 2026 permitió analizar de primera mano la convergencia entre el software, el diseño avanzado de modas y la manufactura pesada. Se evidenció cómo las interfaces programables, los sistemas de confección asistida por computadora y las propuestas de la academia están transformando e impulsando los eslabones productivos de la industria del diseño y la confección.</p>
+            </section>
+
+       
+            <h3 class="section-title">Registro Fotográfico del Evento</h3>
+            <main class="grid-gallery">
+                <div class="card">
+                    <div class="media-container" style="border-bottom: 3px solid #1565c0;">
+                        <img src="img21.jpeg" alt="Equipo de Aprendices del SENA">
+                    </div>
+                    <div class="card-content">
+                        <span class="badge bg-team">Equipo Académico</span>
+                        <h3>Comunidad de Aprendices SENA</h3>
+                        <p>Memoria e interacción grupal de los aprendices durante la jornada de inmersión técnica. El registro evidencia el trabajo colaborativo, el intercambio de conceptos en campo y el enfoque académico de la visita a los pabellones de la feria.</p>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="media-container" style="border-bottom: 3px solid #364fc7;">
+                        <img src="img20.jpeg" alt="Escenario Central Createx">
+                    </div>
+                    <div class="card-content">
+                        <span class="badge bg-event">Escenario Principal</span>
+                        <h3>Auditorio y Foro Central de Ponencias</h3>
+                        <p>Vista general de la tarima principal de Createx durante uno de los ciclos de conferencias. El espacio integra ayudas audiovisuales de gran formato y un podio digital diseñado para la socialización de proyectos ante el público de la industria.</p>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="media-container" style="border-bottom: 3px solid #0ca678;">
+                        <img src="img22.jpeg" alt="Módulo de Confección Industrial Automatizada">
+                    </div>
+                    <div class="card-content">
+                        <span class="badge bg-industry">Maquinaria Industrial</span>
+                        <h3>Estaciones de Alta Producción (755 S)</h3>
+                        <p>Módulo tecnológico enfocado en la optimización de procesos de confección a gran escala. La maquinaria destaca por su alta eficiencia operativa, anunciando la capacidad técnica de procesar hasta 2000 piezas en jornadas de 8 horas de trabajo contínuo.</p>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="media-container" style="border-bottom: 3px solid #364fc7;">
+                        <img src="img8.jpeg" alt="Pabellón Impocoser - Pantalla Inteligente MAICA">
+                    </div>
+                    <div class="card-content">
+                        <span class="badge bg-industry">Sistemas Embebidos</span>
+                        <h3>Automatización Tecnológica con Impocoser</h3>
+                        <p>Visualización en planta de la estación automatizada MAICA UAM04 enfocada en alta eficiencia de costura estructurada. La integración de paneles detallados permite a los desarrolladores analizar el rendimiento informático del hardware de manufactura avanzada.</p>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="media-container" style="border-bottom: 3px solid #364fc7;">
+                        <img src="img9.jpeg" alt="Líneas de Producción Positex e Impocoser">
+                    </div>
+                    <div class="card-content">
+                        <span class="badge bg-industry">Logística y Planta</span>
+                        <h3>Optimización de Módulos Operativos</h3>
+                        <p>Perspectiva de los entornos comerciales e industriales interactivos de Positex e Impocoser. Se observa la distribución del espacio técnico y las pantallas de soporte orientadas a agilizar el trabajo operario con diversos tipos de tejidos planos y estructurados.</p>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="media-container" style="border-bottom: 3px solid #364fc7;">
+                        <img src="img10.jpeg" alt="Panorámica General del Pabellón Técnico">
+                    </div>
+                    <div class="card-content">
+                        <span class="badge bg-event">Entorno Comercial</span>
+                        <h3>Infraestructura de Marcas e Industria</h3>
+                        <p>Vista de uno de los corredores principales de la feria que reúne las marcas independientes y de insumos técnicos. El espacio destaca la interacción comercial de soluciones de automatización aplicadas al diseño textil contemporáneo.</p>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="media-container" style="border-bottom: 3px solid #364fc7;">
+                        <img src="img11.jpeg" alt="Eje central Impocoser y marcas aliadas">
+                    </div>
+                    <div class="card-content">
+                        <span class="badge bg-tech">Maquinaria Especializada</span>
+                        <h3>Pasillos de Tecnología y Marcas Aliadas</h3>
+                        <p>Registro visual de la zona de demostración de Impocoser que agrupa tecnologías líderes como Durkopp Adler, Groz-Beckert, Pfaff y Kansai Special. Destaca la perfecta infraestructura logística y el uso de alfombras rojas para guiar el flujo técnico del público.</p>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="media-container" style="border-bottom: 3px solid #cc5de8;">
+                        <img src="img12.jpeg" alt="Exhibición académica de maniquíes">
+                    </div>
+                    <div class="card-content">
+                        <span class="badge bg-design">Diseño de Modas</span>
+                        <h3>Muestra y Expresión de Vanguardia Académica</h3>
+                        <p>Zona de pasarela y exhibición estática con maniquíes que presentan propuestas de trajes con siluetas asimétricas, combinaciones de texturas y contrastes de color dramáticos, sirviendo de inspiración conceptual para nuevos desarrollos creativos.</p>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="media-container" style="border-bottom: 3px solid #cc5de8;">
+                        <img src="img13.jpeg" alt="Detalle de Ficha Técnica Universidad ECCI">
+                    </div>
+                    <div class="card-content">
+                        <span class="badge bg-design">Análisis Técnico</span>
+                        <h3>Documentación de Fichas Técnicas - ECCI</h3>
+                        <p>Inspección detallada de una ficha técnica de diseño perteneciente a la Universidad ECCI. El documento especifica el uso de materiales como Drill, Tul y Encaje bajo un concepto y línea de diseño de carácter histórico con inspiración romántico-gótica.</p>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="media-container" style="border-bottom: 3px solid #364fc7;">
+                        <img src="img14.jpeg" alt="Pantalla de Negocios Hilo a Hilo">
+                    </div>
+                    <div class="card-content">
+                        <span class="badge bg-event">Networking</span>
+                        <h3>Estrategias de Negocio: Hilo a Hilo</h3>
+                        <p>Estación multimedia interactiva donde se proyecta el espacio de interacción sectorial "Negocios Hilo a Hilo", diseñado para conectar ideas, optimizar cadenas de suministro y fomentar alianzas estratégicas entre desarrolladores de tecnología y productores textiles.</p>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="media-container" style="border-bottom: 3px solid #364fc7;">
+                        <img src="img15.jpeg" alt="Montaje del Auditorio Central de Pasarela">
+                    </div>
+                    <div class="card-content">
+                        <span class="badge bg-event">Infraestructura</span>
+                        <h3>Escenario Principal y Zona de Desfiles</h3>
+                        <p>Vista del auditorio principal listo para las ponencias centrales y desfiles de marcas. Cuenta con un pasillo alfombrado y pantallas de gran formato al fondo para el despliegue de material audiovisual de alta fidelidad.</p>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="media-container" style="border-bottom: 3px solid #0ca678;">
+                        <img src="img16.jpeg" alt="Stand Molida y Clúster de Moda de Bogotá">
+                    </div>
+                    <div class="card-content">
+                        <span class="badge bg-industry">Emprendimiento</span>
+                        <h3>Clúster de Moda de la Cámara de Comercio</h3>
+                        <p>Registro del stand de Molida en el pabellón respaldado por el Clúster de Moda de la Cámara de Comercio de Bogotá. El espacio promueve el lema "¡Moda que inspira, negocios que crecen!" y la venta de productos únicos mediante el uso visible de códigos QR informáticos.</p>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="media-container" style="border-bottom: 3px solid #0ca678;">
+                        <img src="img17.jpeg" alt="Módulos de Diseño Vanguardia y Futuro">
+                    </div>
+                    <div class="card-content">
+                        <span class="badge bg-industry">Emprendimiento</span>
+                        <h3>Ecosistema de Diseño, Vanguardia y Futuro</h3>
+                        <p>Módulos de exhibición comercial dedicados a marcas de diseño emergente como Frikid y Casa Rhod. Los espacios interactivos demuestran una excelente organización logística pensada para acercar las últimas tendencias de prendas de vestir al consumidor contemporáneo.</p>
+                    </div>
+                </div>
+            </main>
+
+           
+            <h3 class="section-title">Evidencia Multimedia en Movimiento</h3>
+            <main class="grid-gallery">
+                <div class="card">
+                    <div class="media-container">
+                        <video controls>
+                            <source src="video2.mp4" type="video/mp4">
+                            Tu navegador no soporta la reproducción de video HTML5.
+                        </video>
+                    </div>
+                    <div class="card-content">
+                        <span class="badge bg-video">Video Reporte 01</span>
+                        <h3>Pasarela Temática e Histórica</h3>
+                        <p>Captura en movimiento del desfile central. El fragmento resalta una puesta en escena enfocada en el rol histórico y el empoderamiento de la mujer en la industria textil, modelando piezas de alta costura que fusionan tonos blancos y rojos de manera dramática.</p>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="media-container">
+                        <video controls>
+                            <source src="video3.mp4" type="video/mp4">
+                            Tu navegador no soporta la reproducción de video HTML5.
+                        </video>
+                    </div>
+                    <div class="card-content">
+                        <span class="badge bg-video">Video Reporte 02</span>
+                        <h3>Interacción en el Auditorio Central</h3>
+                        <p>Registro ambiental que documenta la dinámica de los asistentes y la toma de apuntes multimedia durante los páneles interactivos del evento, evidenciando el intercambio técnico entre los expositores y el público especializado.</p>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="media-container">
+                        <video controls>
+                            <source src="viedo.mp4" type="video/mp4">
+                            Tu navegador no soporta la reproducción de video HTML5.
+                        </video>
+                    </div>
+                    <div class="card-content">
+                        <span class="badge bg-video">Video Reporte 03</span>
+                        <h3>Bordado y Tejido Automatizado de Precisión</h3>
+                        <p>Muestra técnica en video de un sistema electromecánico industrial de alta velocidad funcionando en tiempo real en el stand de CAMFive / Miratex. Permite analizar de forma directa la velocidad de ciclo, los cabezales automatizados y el embobinado del hilo.</p>
+                    </div>
+                </div>
+            </main>
+        </div>
+
+  
+        <div id="content2" class="tab-content">
+            <section class="intro-section intro-colombia">
+                <h2>Soberanía Digital, Innovación y Productividad</h2>
+                <p>El encuentro <strong>Colombia 5.0</strong>, bajo la consigna de <em>"Acceso, soberanía y productividad"</em>, se consolidó como un espacio crítico para el análisis de las TIC en el país. El evento destacó ponencias de líderes de la industria del software y del diseño interactivo, enfocándose en cómo el desarrollo tecnológico centrado en las personas impulsa la economía digital y los videojuegos en la región.</p>
+            </section>
+
+            <main class="grid-gallery">
+                <div class="card">
+                    <div class="media-container" style="border-bottom: 3px solid #0ca678;">
+                        <img src="img4.jpeg" alt="Apertura del Evento Colombia 5.0">
+                    </div>
+                    <div class="card-content">
+                        <span class="badge bg-event">Ponencia Central</span>
+                        <h3>Acceso, Soberanía y Productividad</h3>
+                        <p>Acto de apertura oficial del evento gestionado por el Ministerio TIC, proyectando las bases de la soberanía tecnológica. La agenda académica se centró en democratizar el acceso a herramientas digitales de última generación para potenciar la productividad en las industrias locales.</p>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="media-container" style="border-bottom: 3px solid #0ca678;">
+                        <img src="img3.jpeg" alt="Conferencia de Andrés Felipe Pisso Tobar">
+                    </div>
+                    <div class="card-content">
+                        <span class="badge bg-ux">Diseño UI/UX</span>
+                        <h3>Game UI Systems: De Pantallas Bonitas a Interfaces Útiles</h3>
+                        <p>Ponencia especializada a cargo de Andrés Felipe Pisso Tobar, Lead UX Designer en Teravision Games. Se abordaron metodologías ágiles de diseño aplicadas a sistemas de interfaces de usuario en la industria de los videojuegos, conectando la teoría visual con la usabilidad funcional.</p>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="media-container" style="border-bottom: 3px solid #0ca678;">
+                        <img src="img2.jpeg" alt="Cierre de Ponencia y Redes Teravision Games">
+                    </div>
+                    <div class="card-content">
+                        <span class="badge bg-ux">Interacción</span>
+                        <h3>Experiencias y Mejores Decisiones en Diseño</h3>
+                        <p>Cierre del bloque de diseño de interacción interactiva. Se destacó la importancia de optimizar la toma de decisiones UX bajo los pilares de "Mejores Decisiones, Mejores Experiences, Mejores Juegos", invitando a la comunidad de desarrollo a conectar a través de canales profesionales en redes.</p>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="media-container" style="border-bottom: 3px solid #0ca678;">
+                        <img src="img5.jpeg" alt="Ponencia I.ART - Desarrollo Tecnológico Humano">
+                    </div>
+                    <div class="card-content">
+                        <span class="badge bg-tech">Tecnología Humana</span>
+                        <h3>I.ART: El Desarrollo Tecnológico Centrado en las Personas</h3>
+                        <p>Análisis del impacto social de las nuevas tecnologías mediante el enfoque interactivo de la experiencia fotográfica y digital. La ponencia debatió la necesidad ética de priorizar al ser humano en el ciclo de vida del desarrollo de software y la inteligencia artificial.</p>
+                    </div>
+                </div>
+            </main>
+        </div>
+
+        <footer>
+            <p>Memorias Técnicas 2026 • Diseñado con HTML5, CSS3 y responsive design para registros académicos. de JUAN SEBASTIAN POLANIA REYES</p>
+        </footer>
+    </div>
+
+</body>
+</html>
